@@ -1,0 +1,24 @@
+version: "2.1"
+
+volumes:
+  files-datavolume:
+
+networks:
+  gcp_network:
+      name: "SUBIENDO"
+      driver: bridge
+      external: true
+
+services:
+  prod.server.despliegue:
+    labels:
+      svc: "server-despliegue"
+    restart: always
+    container_name: prod.server.despliegue
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    ports:
+      - "3000"
+    networks:
+      - gcp_network
